@@ -1,0 +1,51 @@
+﻿<UserControl 
+             x:Name="RTValueItem"
+             x:Class="PadUI.Theme.RTValueItemTheme"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PadUI.Theme"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+
+        <!--标签-->
+        <Border Grid.Row="0" Grid.Column="0"
+                    Background="#495C7F"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="5 5 0 0"/>
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                    Text="{Binding Path=ValueName,ElementName=RTValueItem}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="White"
+                    FontSize="20"/>
+        <!--实时值-->
+        <Border Grid.Row="1" Grid.Column="0"
+                    Background="#000000"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="0 0 5 5"/>
+
+        <TextBlock  Grid.Row="1" Grid.Column="0"                    
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="#FFFF12"
+                    FontFamily="Arial"
+                    FontWeight="Bold"
+                    FontSize="40">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0:N1}">
+                    <Binding Path="Value" ElementName="RTValueItem"/>                    
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,110 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PadUI.MVVM.View"
+             xmlns:viewModel="clr-namespace:PadUI.MVVM.ViewModel"         
+             xmlns:ucRTItem="clr-namespace:PadUI.Theme"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" x:Class="PadUI.MVVM.View.RealTimeView"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="800">
+    
+    <!--<Control.DataContext>
+        <viewModel:RealTimeViewModel x:Name="realTimeVM"/>
+    </Control.DataContext>-->  
+    
+    <StackPanel>        
+        <!-- 实时值标签布局 -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--光通量曲线图-->
+            <oxy:PlotView Grid.Column="0" x:Name="pltLight"
+                          Grid.ColumnSpan="2"
+                          Model="{Binding lightModel}"
+                          Margin="5"/>
+            <!--温度曲线图-->
+            <oxy:PlotView Grid.Column="2" x:Name="pltTemp"
+                          Grid.ColumnSpan="2"
+                          Model="{Binding tempModel}"
+                          Margin="5"/>
+
+            <!--试验计时-->
+            <ucRTItem:RTValueItemTheme 
+                   Grid.Row="1" Grid.Column="0"
+                   ValueName="计时(s)"
+                   Value="{Binding Path=Timer}"
+                   Margin="28 18 28 18"/>
+
+            <!--任务模式-->
+            
+
+            <!--工作状态-->
+            
+
+            <!--光通量-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="2" Grid.Column="0"
+                    ValueName="光通量(%)"
+                    Value="{Binding Path=Light}"
+                    Margin="28 18 28 18"/>
+            <!--热辐射值-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="2" Grid.Column="1"
+                    ValueName="热辐射值(kW/s)"
+                    Value="{Binding Path=HF}"
+                    Margin="28 18 28 18"/>
+            <!--管道风速-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="2" Grid.Column="2"
+                    ValueName="管道风速(m/s)"
+                    Value="{Binding Path=DuctF}"
+                    Margin="28 18 28 18"/>
+            <!--箱体温度-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="3" Grid.Column="0"
+                    ValueName="箱体温度(℃)"
+                    Value="{Binding Path=CHT}"
+                    Margin="28 18 28 18"/>
+            <!--黑体温度-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="3" Grid.Column="1"
+                    ValueName="黑体温度(℃)"
+                    Value="{Binding Path=BBT}"
+                    Margin="28 18 28 18"/>
+            <!--烟道温度-->
+            <ucRTItem:RTValueItemTheme 
+                    Grid.Row="3" Grid.Column="2"
+                    ValueName="烟道温度(℃)"
+                    Value="{Binding Path=DuctT}"
+                    Margin="28 18 28 18"/>
+            
+            <!-- 控制按钮 -->
+            <Button Grid.Row="2" Grid.Column="3"
+                    x:Name="btnStart" 
+                    
+                    Content="开始计时" 
+                    Margin="20"
+                    Command="{Binding StartTimerCmd}"/>
+
+            <Button Grid.Row="3" Grid.Column="3"
+                    x:Name="btnStop" 
+                    Content="停止计时" 
+                    Margin="20"
+                    Command="{Binding StopTimerCmd}"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

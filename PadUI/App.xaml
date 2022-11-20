@@ -1,0 +1,37 @@
+﻿<Application x:Class="PadUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:PadUI.MVVM.ViewModel"
+             xmlns:view="clr-namespace:PadUI.MVVM.View"
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!--绑定实时数据视图与视图模型-->
+            <DataTemplate DataType="{x:Type viewModel:RealTimeViewModel}">
+                <view:RealTimeView/>
+            </DataTemplate>
+            <!--绑定新建试验视图与视图模型-->
+            <DataTemplate DataType="{x:Type viewModel:NewExpViewModel}">
+                <view:NewExpView/>
+            </DataTemplate>
+            <!--绑定标定视图与视图模型-->
+            <DataTemplate DataType="{x:Type viewModel:CalibrationViewModel}">
+                <view:CalibrationView/>
+            </DataTemplate>
+            <!--绑定现象记录视图与视图模型-->
+            <DataTemplate DataType="{x:Type viewModel:ExpPhenoViewModel}">
+                <view:ExpPhenoView/>
+            </DataTemplate>
+            <!--绑定控制面板视图与视图模型-->
+            <DataTemplate DataType="{x:Type viewModel:ControlPanelViewModel}">
+                <view:ControlPanelView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

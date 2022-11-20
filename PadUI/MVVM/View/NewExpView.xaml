@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="PadUI.MVVM.View.NewExpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PadUI.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    MinWidth="300" MaxWidth="800">
+            <TextBlock Text="样品信息"
+                       HorizontalAlignment="Center"
+                       FontFamily="Arial"
+                       FontSize="25"
+                       Foreground="#FFFFFF"
+                       FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <!-- 样品编号 -->
+                <TextBlock Text="样品编号:"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="0,0,10,0"/>
+                <TextBox x:Name="txtSmpId"
+                         Width="280" Height="35"
+                         Margin="0,0,20,0"
+                         Text="{Binding Path=SmpId,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+                <!-- 试验编号 -->
+                <TextBlock Text="试验编号:"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="10,0,0,0"/>
+                <TextBox x:Name="txtExpId"
+                         Width="160" Height="35"
+                         Text="{Binding Path=ExpId,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <!-- 样品名称 -->
+                <TextBlock Text="样品名称:"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="0,0,0,0"/>
+                <TextBox x:Name="txtSmpName"
+                         Width="556"
+                         Text="{Binding Path=SmpName,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <!-- 规格型号 -->
+                <TextBlock Text="规格型号:"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="0,0,10,0"/>
+                <TextBox x:Name="txtSpec"
+                         Width="150" Height="35"
+                         Margin="0,0,20,0"
+                         Text="{Binding Path=SmpSpec,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+
+                <!-- 密度 -->
+                <TextBlock Text="密度(g/m3):"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="0,0,10,0"/>
+                <TextBox x:Name="txtDensity"
+                         Width="60" Height="35"
+                         Margin="0,0,20,0"
+                         Text="{Binding Path=Density,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+                <!-- 面密度 -->
+                <TextBlock Text="面密度(g/m2):"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="10,0,0,0"/>
+                <TextBox x:Name="txtSDensity"
+                         Width="60" Height="35"
+                         Text="{Binding Path=SDensity,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <!-- 备注 -->
+                <TextBlock Text="试验备注:"
+                           VerticalAlignment="Center"
+                           Foreground="#FFFFFF"
+                           FontSize="18"
+                           Margin="0,0,0,0"/>
+                <TextBox x:Name="txtExpMemo"
+                         Width="556"
+                         Text="{Binding Path=ExpMemo,Mode=TwoWay}"
+                         Style="{StaticResource SmpInfoTextBoxStyle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        FlowDirection="RightToLeft">
+                <!-- 提交按钮 -->
+                <Button x:Name="btnSubmit"                        
+                        Content="提交"
+                        Width="100" Height="45"
+                        Margin="10"
+                        Command="{Binding SubmitCmd}"/>
+                <!-- 重置按钮 -->
+                <Button x:Name="btnReset"                        
+                        Content="重置"
+                        Width="100" Height="45"
+                        Margin="10"
+                        Command="{Binding ResetCmd}"/>                        
+            </StackPanel>
+        </StackPanel> 
+    </Grid>
+</UserControl>
