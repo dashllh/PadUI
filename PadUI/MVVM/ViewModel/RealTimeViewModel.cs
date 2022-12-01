@@ -107,19 +107,26 @@ namespace PadUI.MVVM.ViewModel
             //添加第二Y轴
             tempModel.Axes.Add(new LinearAxis { Position = AxisPosition.Right, Minimum = 0, Maximum = 100 });
             //添加序列
-            tempModel.Series.Add(new LineSeries { LineStyle = LineStyle.Solid });
-
+            tempModel.Series.Add(new LineSeries { LineStyle = LineStyle.Solid }); //箱体温度
+            tempModel.Series.Add(new LineSeries { LineStyle = LineStyle.Solid }); //黑体温度
             /* 初始化命令按钮 */
             StartTimerCmd = new RelayCommand(o => { StartTimer(); });
             StopTimerCmd = new RelayCommand(o => { StopTimer(); });            
         }
 
-        //向曲线图添加一个点
-        public void AddNewData(int timer)
+        //更新曲线图显示
+        public void RefreshChart(int timer,double light,double cht,double bbt)
         {
+            //光通量曲线图
             var s = (LineSeries)lightModel.Series[0];
-            s.Points.Add(new DataPoint(timer, 20));
+            s.Points.Add(new DataPoint(timer, light));
             lightModel.InvalidatePlot(true);
+            //温度曲线图
+            var sCht = (LineSeries)tempModel.Series[0]; //箱体温度
+            sCht.Points.Add(new DataPoint(timer, cht));
+            var sBbt = (LineSeries)tempModel.Series[1]; //黑体温度
+            sBbt.Points.Add(new DataPoint(timer, bbt));
+            tempModel.InvalidatePlot(true);
         }
 
         //清空曲线显示

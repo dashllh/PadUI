@@ -73,14 +73,14 @@ namespace PadUI.MVVM.ViewModel
             SubmitCmd = new RelayCommand(o => { SubmitInfo(); });
             ResetCmd = new RelayCommand(o => { ResetInfo(); });
 
-            //测试代码
-            SmpId = "2025002002";
-            ExpId = "002";
-            SmpName = "来自遥远的客户端的测试样品";
-            SmpSpec = "100*100";
-            Density = 10.0;
-            SDensity = 20.0;
-            ExpMemo = "测试备注";
+            //初始化数据字段
+            SmpId = "";
+            ExpId = "";
+            SmpName = "";
+            SmpSpec = "";
+            Density = 0.0;
+            SDensity = 0.0;
+            ExpMemo = "";
         }
         private void SubmitInfo()
         {

@@ -59,6 +59,9 @@ namespace PadUI.MVVM.ViewModel
                             RealTimeVM.DuctT = double.Parse(message.Param["DuctT"].ToString());  //烟道温度
                             RealTimeVM.CHT = double.Parse(message.Param["CHT"].ToString());      //箱体温度
                             RealTimeVM.BBT = double.Parse(message.Param["BBT"].ToString());      //黑体温度
+                            //更新试验界面曲线图
+                            RealTimeVM.RefreshChart(RealTimeVM.Timer, RealTimeVM.Light, 
+                                RealTimeVM.CHT,RealTimeVM.BBT);
                             //同步更新试验现象记录ViewModel对象的Timer属性
                             ExpPhenoVM.Timer = RealTimeVM.Timer;
                             break;
@@ -195,7 +198,7 @@ namespace PadUI.MVVM.ViewModel
                     }
                     //测试代码: 曲线动态更新
                     //CurveVM.AddNewData(RealTimeVM.Timer);
-                    RealTimeVM.AddNewData(RealTimeVM.Timer);
+                    //RealTimeVM.AddNewData(RealTimeVM.Timer);
                 }
             }
             catch (Exception)
