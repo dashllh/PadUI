@@ -40,15 +40,15 @@ namespace PadUI.MVVM.ViewModel
          * 参数:
          *       data - 来自服务器的消息(JSON).格式定义参见通信协议文档
          */
-        private void WSocketClient_OnMessage(object? sender, string data)
+        private void WSocketClient_OnMessage(object sender, string data)
         {
-            ExpMaster? master = Application.Current.Properties["Controller"] as ExpMaster;
+            ExpMaster master = Application.Current.Properties["Controller"] as ExpMaster;
             try
             {
                 //响应服务器消息,更新对应UI
                 if (data != null)
                 {
-                    Message? message = JsonSerializer.Deserialize<Message>(data);
+                    Message message = JsonSerializer.Deserialize<Message>(data);
                     switch (message.Cmd)
                     {
                         case 0x00:  //显示实时数据
@@ -122,7 +122,7 @@ namespace PadUI.MVVM.ViewModel
                                 RealTimeVM.ClearChart();
                             }
                             break;
-                        case 0x05:  //记录试验现象
+                        case 0x05:  //记录试验现象(由客户端提交,服务器响应)
                             if(message.Ret == -1)                            
                                 MessageBox.Show(message.Msg, "服务端消息", MessageBoxButton.OK, MessageBoxImage.Error);    
                             else
@@ -136,7 +136,7 @@ namespace PadUI.MVVM.ViewModel
                             else if (master != null)
                             {
                                 /* 添加火焰时间参数 */
-                                ExpPhenoVM.Time60mm = int.Parse(message.Param["60mm"].ToString());
+                                ExpPhenoVM.Time60mm  = int.Parse(message.Param["60mm"].ToString());
                                 ExpPhenoVM.Time110mm = int.Parse(message.Param["110mm"].ToString());
                                 ExpPhenoVM.Time160mm = int.Parse(message.Param["160mm"].ToString());
                                 ExpPhenoVM.Time210mm = int.Parse(message.Param["210mm"].ToString());
@@ -193,12 +193,87 @@ namespace PadUI.MVVM.ViewModel
                             break;
                         case 0x07: //取消当前任务
                             break;
+                        case 0x08: //自动更新火焰时间及火焰位置的显示(由服务器主动发起)
+                            string item = message.Param["item"].ToString();
+                            int value = int.Parse(message.Param["value"].ToString());
+                            switch (item)
+                            {
+                                case "time60":
+                                    ExpPhenoVM.Time60mm = value;
+                                    break;
+                                case "time110":
+                                    ExpPhenoVM.Time110mm = value;
+                                    break;
+                                case "time160":
+                                    ExpPhenoVM.Time160mm = value;
+                                    break;
+                                case "time210":
+                                    ExpPhenoVM.Time210mm = value;
+                                    break;
+                                case "time260":
+                                    ExpPhenoVM.Time260mm = value;
+                                    break;
+                                case "time310":
+                                    ExpPhenoVM.Time310mm = value;
+                                    break;
+                                case "time360":
+                                    ExpPhenoVM.Time360mm = value;
+                                    break;
+                                case "time410":
+                                    ExpPhenoVM.Time410mm = value;
+                                    break;
+                                case "time460":
+                                    ExpPhenoVM.Time460mm = value;
+                                    break;
+                                case "time510":
+                                    ExpPhenoVM.Time510mm = value;
+                                    break;
+                                case "time560":
+                                    ExpPhenoVM.Time560mm = value;
+                                    break;
+                                case "time610":
+                                    ExpPhenoVM.Time610mm = value;
+                                    break;
+                                case "time660":
+                                    ExpPhenoVM.Time660mm = value;
+                                    break;
+                                case "time710":
+                                    ExpPhenoVM.Time710mm = value;
+                                    break;
+                                case "time760":
+                                    ExpPhenoVM.Time760mm = value;
+                                    break;
+                                case "time810":
+                                    ExpPhenoVM.Time810mm = value;
+                                    break;
+                                case "time860":
+                                    ExpPhenoVM.Time860mm = value;
+                                    break;
+                                case "time910":
+                                    ExpPhenoVM.Time910mm = value;
+                                    break;
+                                case "time960":
+                                    ExpPhenoVM.Time960mm = value;
+                                    break;
+                                case "time1010":
+                                    ExpPhenoVM.Time1010mm = value;
+                                    break;
+                                case "dist10min":
+                                    ExpPhenoVM.FlameDist10min = value;
+                                    break;
+                                case "dist20min":
+                                    ExpPhenoVM.FlameDist20min = value;   
+                                    break;
+                                case "dist30min":
+                                    ExpPhenoVM.FlameDist30min = value;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
                         default:
                             break;
                     }
-                    //测试代码: 曲线动态更新
-                    //CurveVM.AddNewData(RealTimeVM.Timer);
-                    //RealTimeVM.AddNewData(RealTimeVM.Timer);
                 }
             }
             catch (Exception)

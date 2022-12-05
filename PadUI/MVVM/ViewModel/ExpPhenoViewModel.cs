@@ -304,9 +304,9 @@ namespace PadUI.MVVM.ViewModel
         }
 
         /* 命令对象 */
-        public RelayCommand? RefreshCmd { get; set; }
-        public RelayCommand? SubmitCmd { get; set; }
-        public RelayCommand? RecordTimeCmd { get; set; }
+        public RelayCommand RefreshCmd { get; set; }
+        public RelayCommand SubmitCmd { get; set; }
+        public RelayCommand RecordTimeCmd { get; set; }
 
         //WebSocket对象
         private readonly WSClientHelper? _ws;
@@ -381,7 +381,14 @@ namespace PadUI.MVVM.ViewModel
         private void Refresh()
         {
             /* 从服务端获取最新试验记录信息 */
-            //...
+            Message _msg = new Message();
+            _msg.Cmd = 0x06;
+            _msg.Ret = 0;
+            _msg.Msg = "";
+            _msg.Param = new Dictionary<string, object>();
+            string jsoncmd = JsonSerializer.Serialize(_msg);
+            //发送WebSocket消息
+            if (_ws != null) _ws.Send(jsoncmd);
         }
         private void Submit()
         {
