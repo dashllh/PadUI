@@ -9,24 +9,24 @@ namespace PadUI.MVVM.ViewModel
 {
     class MainViewModel : ObsevableObject
     {
-        public RelayCommand? NewExpCmd { get; set; }
-        public RelayCommand? RealTimeCmd { get; set; }
-        public RelayCommand? AboutCmd { get; set; }
-        public RelayCommand? CtrlPanelCmd { get; set; }
-        public RelayCommand? QuitCmd { get; set; }
-        public RelayCommand? CaliCmd { get; set; }
-        public RelayCommand? ExpPhenoCmd { get; set; }
-        public NewExpViewModel? NewExpVM { get; set; }
-        public RealTimeViewModel? RealTimeVM { get; set; }
-        public ControlPanelViewModel? ControlPanelVM { get; set; }
-        public CalibrationViewModel? CalibrationVM { get; set; } 
-        public ExpPhenoViewModel? ExpPhenoVM { get; set; }
+        public RelayCommand NewExpCmd { get; set; }
+        public RelayCommand RealTimeCmd { get; set; }
+        public RelayCommand AboutCmd { get; set; }
+        public RelayCommand CtrlPanelCmd { get; set; }
+        public RelayCommand QuitCmd { get; set; }
+        public RelayCommand CaliCmd { get; set; }
+        public RelayCommand ExpPhenoCmd { get; set; }
+        public NewExpViewModel NewExpVM { get; set; }
+        public RealTimeViewModel RealTimeVM { get; set; }
+        public ControlPanelViewModel ControlPanelVM { get; set; }
+        public CalibrationViewModel CalibrationVM { get; set; } 
+        public ExpPhenoViewModel ExpPhenoVM { get; set; }
 
-        private readonly WSClientHelper? _ws;        
+        private readonly WSClientHelper _ws;        
 
         //视图属性声明
-        private object? _currentView;
-        public object? CurrentView 
+        private object _currentView;
+        public object CurrentView 
         {
             get { return _currentView; }
             set 
