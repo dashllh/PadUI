@@ -12,7 +12,7 @@ namespace PadUI.MVVM.ViewModel
     internal class ExpPhenoViewModel : ObsevableObject
     {
         //测试代码: 静态属性-当前获得键盘焦点的控件引用
-        public static UserControl? FocusedElement = null;
+        public static UserControl FocusedElement = null;
 
         /* 火焰时间属性定义 */
         //Timer
@@ -162,6 +162,14 @@ namespace PadUI.MVVM.ViewModel
             set { _Time1010mm = value; OnPropertyChanged(); }
         }
 
+        //试样起火时间
+        private int _onFlameTime;
+        public int OnFlameTime
+        {
+            get { return _onFlameTime; }
+            set { _onFlameTime = value; OnPropertyChanged(); }
+        }
+
         //火焰熄灭时间
         private int _flameOutTime;
         public int FlameOutTime
@@ -309,7 +317,7 @@ namespace PadUI.MVVM.ViewModel
         public RelayCommand RecordTimeCmd { get; set; }
 
         //WebSocket对象
-        private readonly WSClientHelper? _ws;
+        private readonly WSClientHelper _ws;
 
         //构造函数
         public ExpPhenoViewModel()
@@ -317,7 +325,7 @@ namespace PadUI.MVVM.ViewModel
             //属性初始化
             IsShanRan = false;
             ZiXiMie = true;
-            QiangXiMie = true;
+            QiangXiMie = false;
 
             //初始化WebSocket客户端回调方法
             _ws = Application.Current.Properties["WSProxy"] as WSClientHelper;
@@ -350,6 +358,7 @@ namespace PadUI.MVVM.ViewModel
             Time910mm = 0;
             Time960mm = 0;
             Time1010mm = 0;
+            OnFlameTime = 0;
             FlameOutTime = 0;
             FlameDist10min = 0;
             FlameDist20min = 0;
@@ -419,7 +428,8 @@ namespace PadUI.MVVM.ViewModel
             _msg.Param.Add("910mm", _Time910mm);      //910mm
             _msg.Param.Add("960mm", _Time960mm);      //960mm
             _msg.Param.Add("1010mm",_Time1010mm);     //1010mm
-            _msg.Param.Add("flameouttime", _flameOutTime);  //火焰熄灭时间
+            _msg.Param.Add("onflametime", _onFlameTime);  //试样起火时间
+            _msg.Param.Add("flameouttime", _flameOutTime);//火焰熄灭时间
             /* 添加火焰熄灭方式参数 */
             _msg.Param.Add("ziximie",    _ZiXiMie);    //自然熄灭
             _msg.Param.Add("qiangximie", _QiangXiMie); //强制熄灭

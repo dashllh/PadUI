@@ -115,6 +115,10 @@
                                       LabelText="1010mm:"
                                       Value="{Binding Time1010mm,Mode=TwoWay}"/>
 
+                    <uc:FlameTimeItem Grid.Row="5" Grid.Column="2"
+                                      LabelText="起火时间:"
+                                      Value="{Binding OnFlameTime,Mode=TwoWay}"/>
+
                     <uc:FlameTimeItem Grid.Row="5" Grid.Column="3"
                                       LabelText="熄灭时间:"
                                       Value="{Binding FlameOutTime,Mode=TwoWay}"/>

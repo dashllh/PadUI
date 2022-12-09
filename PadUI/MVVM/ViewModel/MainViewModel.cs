@@ -156,6 +156,11 @@ namespace PadUI.MVVM.ViewModel
                                 ExpPhenoVM.Time910mm = int.Parse(message.Param["910mm"].ToString());
                                 ExpPhenoVM.Time960mm = int.Parse(message.Param["960mm"].ToString());
                                 ExpPhenoVM.Time1010mm = int.Parse(message.Param["1010mm"].ToString());
+
+                                //2022-12-9 增加试样起火时间与火焰熄灭时间
+                                ExpPhenoVM.OnFlameTime = int.Parse(message.Param["onflametime"].ToString());
+                                ExpPhenoVM.FlameOutTime = int.Parse(message.Param["flameouttime"].ToString());
+
                                 /* 添加火焰熄灭方式参数 */
                                 int iXimieType = int.Parse(message.Param["ximietype"].ToString());
                                 if (iXimieType == 0)
