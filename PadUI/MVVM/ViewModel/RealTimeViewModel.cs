@@ -67,17 +67,17 @@ namespace PadUI.MVVM.ViewModel
         }
 
         //光通量曲线数据模型
-        public PlotModel? lightModel { get; set; }
+        public PlotModel lightModel { get; set; }
         //温度曲线数据模型
-        public PlotModel? tempModel { get; set; }
+        public PlotModel tempModel { get; set; }
         //开始计时命令
-        public RelayCommand? StartTimerCmd { get; set; }
+        public RelayCommand StartTimerCmd { get; set; }
         //停止计时命令
-        public RelayCommand? StopTimerCmd { get; set; }
+        public RelayCommand StopTimerCmd { get; set; }
         //websocket客户端对象
-        private readonly WSClientHelper? _ws;
+        private readonly WSClientHelper _ws;
         //控制器对象
-        public readonly ExpMaster? _master;
+        public readonly ExpMaster _master;
         public RealTimeViewModel()
         {
             _ws     = Application.Current.Properties["WSProxy"] as WSClientHelper;
@@ -132,13 +132,17 @@ namespace PadUI.MVVM.ViewModel
         //清空曲线显示
         public void ClearChart()
         {
-            var s = (LineSeries)lightModel.Series[0];
-            s.Points.Clear();
+            var s1 = (LineSeries)lightModel.Series[0];            
+            var s2 = (LineSeries)tempModel.Series[0];            
+            var s3 = (LineSeries)tempModel.Series[1];
+            s1.Points.Clear();
+            s2.Points.Clear();            
+            s3.Points.Clear();
         }
 
         private void StartTimer()
         {
-            ExpMaster? master = Application.Current.Properties["Controller"] as ExpMaster;
+            ExpMaster master = Application.Current.Properties["Controller"] as ExpMaster;
             //判断控制器当前状态,若不处于可计时状态则返回
             if (master != null && master.Status == MasterStatus.Working)
             {
@@ -171,7 +175,7 @@ namespace PadUI.MVVM.ViewModel
         private void StopTimer()
         {
             //判断控制器当前状态,若不处于可停止计时状态则返回
-            ExpMaster? master = Application.Current.Properties["Controller"] as ExpMaster;
+            ExpMaster master = Application.Current.Properties["Controller"] as ExpMaster;
             if(master != null && master.WorkMode == MasterWorkMode.Experiment && 
                 master.Status == MasterStatus.Working)
             {
